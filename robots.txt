@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: http://xn--q20b93bn3jn0if7fdzvexe.com/sitemap.xml
