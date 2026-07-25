@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 3000);
   }
 
-  // 6. Contact Form Submission Handling
+  // 6. Contact Form Submission Handling (Telegram Integration)
   const interestForm = document.getElementById('interest-form');
   
   if (interestForm) {
@@ -134,6 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const phoneInput = document.getElementById('user-phone');
       const prefTypeSelect = document.getElementById('pref-type');
       const privacyAgreeCheckbox = document.getElementById('privacy-agree');
+      const submitBtn = interestForm.querySelector('.btn-submit');
       
       // Clean up phone number input (digits only)
       const phoneValue = phoneInput.value.replace(/[^0-9]/g, '');
@@ -162,33 +163,78 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
       
-      // Save data locally (Simulated server request)
-      const registrationData = {
-        name: nameInput.value.trim(),
-        phone: phoneValue,
-        prefType: prefTypeSelect.value,
-        chkResident: document.getElementById('chk-resident').checked,
-        chkHouse: document.getElementById('chk-house').checked,
-        registeredAt: new Date().toISOString()
-      };
+      // Disable submit button and show loading state
+      const originalBtnText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = '등록 중...';
       
-      // Retrieve existing registrations
-      let existingList = [];
-      try {
-        existingList = JSON.parse(localStorage.getItem('hernity_registrations') || '[]');
-      } catch (err) {
-        existingList = [];
-      }
+      const chkResident = document.getElementById('chk-resident').checked ? '동의/해당' : '미동의/미해당';
+      const chkHouse = document.getElementById('chk-house').checked ? '동의/해당' : '미동의/미해당';
+      const prefTypeText = prefTypeSelect.options[prefTypeSelect.selectedIndex].text;
       
-      existingList.push(registrationData);
-      localStorage.setItem('hernity_registrations', JSON.stringify(existingList));
+      // Telegram Bot Details
+      const botToken = '8945070290:AAGVX0fHTNAC68BgBBP7DstL2V0PXxEa-wQ';
+      const chatId = '8753795118';
       
-      // Success Alert
-      showToast('관심고객 등록이 정상적으로 완료되었습니다! 분양 안내 정보가 곧 발송됩니다.', 'success');
+      const messageText = `✨ [남성역 헤르니티 관심고객 등록] ✨
+--------------------------------
+👤 성함: ${nameInput.value.trim()}
+📞 연락처: ${phoneValue}
+🏠 관심 평형: ${prefTypeText}
+--------------------------------
+💡 조합원 요건 체크:
+- 서울/경기/인천 6개월 거주: ${chkResident}
+- 무주택 또는 85㎡ 이하 1주택: ${chkHouse}
+--------------------------------
+📅 신청일시: ${new Date().toLocaleString('ko-KR')}`;
       
-      // Reset form
-      interestForm.reset();
+      fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: messageText
+        })
+      })
+      .then(response => {
+        if (response.ok) {
+          // Save data locally as backup
+          const registrationData = {
+            name: nameInput.value.trim(),
+            phone: phoneValue,
+            prefType: prefTypeSelect.value,
+            chkResident: document.getElementById('chk-resident').checked,
+            chkHouse: document.getElementById('chk-house').checked,
+            registeredAt: new Date().toISOString()
+          };
+          
+          let existingList = [];
+          try {
+            existingList = JSON.parse(localStorage.getItem('hernity_registrations') || '[]');
+          } catch (err) {
+            existingList = [];
+          }
+          existingList.push(registrationData);
+          localStorage.setItem('hernity_registrations', JSON.stringify(existingList));
+          
+          // Success Alert
+          showToast('관심고객 등록이 정상적으로 완료되었습니다! 분양 안내 정보가 곧 발송됩니다.', 'success');
+          interestForm.reset();
+        } else {
+          showToast('등록 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.', 'error');
+        }
+      })
+      .catch(error => {
+        console.error('Error sending message:', error);
+        showToast('네트워크 오류가 발생했습니다. 인터넷 연결을 확인해 주세요.', 'error');
+      })
+      .finally(() => {
+        // Restore button state
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalBtnText;
+      });
     });
   }
-
 });
