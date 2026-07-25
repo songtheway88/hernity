@@ -133,6 +133,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const nameInput = document.getElementById('user-name');
       const phoneInput = document.getElementById('user-phone');
       const prefTypeSelect = document.getElementById('pref-type');
+      const residenceInput = document.getElementById('user-residence');
+      const visitDateInput = document.getElementById('visit-date');
+      const messageInput = document.getElementById('user-message');
       const privacyAgreeCheckbox = document.getElementById('privacy-agree');
       const submitBtn = interestForm.querySelector('.btn-submit');
       
@@ -141,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
       
       // Validation Check
       if (!nameInput.value.trim()) {
-        showToast('성함을 입력해 주세요.', 'error');
+        showToast('이름을 입력해 주세요.', 'error');
         nameInput.focus();
         return;
       }
@@ -164,13 +167,23 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       
       // Disable submit button and show loading state
-      const originalBtnText = submitBtn.textContent;
+      const originalBtnText = submitBtn.innerHTML;
       submitBtn.disabled = true;
       submitBtn.textContent = '등록 중...';
       
-      const chkResident = document.getElementById('chk-resident').checked ? '동의/해당' : '미동의/미해당';
-      const chkHouse = document.getElementById('chk-house').checked ? '동의/해당' : '미동의/미해당';
+      // Format phone number for readability: e.g. 01012345678 -> 010-1234-5678
+      let formattedPhone = phoneValue;
+      if (phoneValue.length === 11) {
+        formattedPhone = `${phoneValue.slice(0, 3)}-${phoneValue.slice(3, 7)}-${phoneValue.slice(7)}`;
+      } else if (phoneValue.length === 10) {
+        formattedPhone = `${phoneValue.slice(0, 3)}-${phoneValue.slice(3, 6)}-${phoneValue.slice(6)}`;
+      }
+      
       const prefTypeText = prefTypeSelect.options[prefTypeSelect.selectedIndex].text;
+      
+      // Get marketing funnel selection
+      const funnelCheckboxes = interestForm.querySelectorAll('input[name="funnel"]:checked');
+      const funnelValues = Array.from(funnelCheckboxes).map(cb => cb.value).join(', ') || '없음';
       
       // Telegram Bot Details
       const botToken = '8945070290:AAGVX0fHTNAC68BgBBP7DstL2V0PXxEa-wQ';
@@ -178,13 +191,13 @@ document.addEventListener('DOMContentLoaded', () => {
       
       const messageText = `✨ [남성역 헤르니티 관심고객 등록] ✨
 --------------------------------
-👤 성함: ${nameInput.value.trim()}
-📞 연락처: ${phoneValue}
+👤 이름: ${nameInput.value.trim()}
+📞 연락처: ${formattedPhone}
 🏠 관심 평형: ${prefTypeText}
---------------------------------
-💡 조합원 요건 체크:
-- 서울/경기/인천 6개월 거주: ${chkResident}
-- 무주택 또는 85㎡ 이하 1주택: ${chkHouse}
+📍 현재 거주지: ${residenceInput.value.trim() || '미입력'}
+📅 방문희망일시: ${visitDateInput.value.trim() || '미입력'}
+💬 문의사항: ${messageInput.value.trim() || '없음'}
+🔍 인입 경로: ${funnelValues}
 --------------------------------
 📅 신청일시: ${new Date().toLocaleString('ko-KR')}`;
       
@@ -205,8 +218,10 @@ document.addEventListener('DOMContentLoaded', () => {
             name: nameInput.value.trim(),
             phone: phoneValue,
             prefType: prefTypeSelect.value,
-            chkResident: document.getElementById('chk-resident').checked,
-            chkHouse: document.getElementById('chk-house').checked,
+            residence: residenceInput.value.trim(),
+            visitDate: visitDateInput.value.trim(),
+            message: messageInput.value.trim(),
+            funnel: Array.from(funnelCheckboxes).map(cb => cb.value),
             registeredAt: new Date().toISOString()
           };
           
@@ -220,7 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
           localStorage.setItem('hernity_registrations', JSON.stringify(existingList));
           
           // Success Alert
-          showToast('관심고객 등록이 정상적으로 완료되었습니다! 분양 안내 정보가 곧 발송됩니다.', 'success');
+          showToast('상담 신청이 정상적으로 완료되었습니다! 담당자가 곧 연락드리겠습니다.', 'success');
           interestForm.reset();
         } else {
           showToast('등록 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.', 'error');
@@ -233,7 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .finally(() => {
         // Restore button state
         submitBtn.disabled = false;
-        submitBtn.textContent = originalBtnText;
+        submitBtn.innerHTML = originalBtnText;
       });
     });
   }

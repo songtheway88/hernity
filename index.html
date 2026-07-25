@@ -720,25 +720,22 @@
 
         <div class="contact-form-panel">
           <form id="interest-form" class="interest-form">
-            <div class="form-row">
+            <div class="form-row grid-2">
               <div class="form-group">
-                <label for="user-name">성함 <span class="required">*</span></label>
-                <input type="text" id="user-name" name="name" placeholder="성함을 입력해주세요." required>
+                <label for="user-name">이름 <span class="required">*</span></label>
+                <input type="text" id="user-name" name="name" placeholder="홍길동" required>
               </div>
-            </div>
-
-            <div class="form-row">
               <div class="form-group">
                 <label for="user-phone">연락처 <span class="required">*</span></label>
-                <input type="tel" id="user-phone" name="phone" placeholder="숫자만 입력 (예: 01012345678)" required>
+                <input type="tel" id="user-phone" name="phone" placeholder="010-0000-0000" required>
               </div>
             </div>
 
-            <div class="form-row">
+            <div class="form-row grid-2">
               <div class="form-group">
-                <label for="pref-type">관심 평형대 <span class="required">*</span></label>
+                <label for="pref-type">관심 평형 <span class="required">*</span></label>
                 <select id="pref-type" name="prefType" required>
-                  <option value="">평형 선택</option>
+                  <option value="">선택해 주세요</option>
                   <option value="49">49㎡ (소형 명작)</option>
                   <option value="59">59㎡ (A/B/C 실속형)</option>
                   <option value="74">74㎡ (수납강화 중형)</option>
@@ -746,20 +743,59 @@
                   <option value="102">102㎡ 및 펜트하우스</option>
                 </select>
               </div>
+              <div class="form-group">
+                <label for="user-residence">현재 거주지</label>
+                <input type="text" id="user-residence" name="residence" placeholder="서울시 강남구">
+              </div>
             </div>
 
-            <!-- 자격 체크 (보조용) -->
-            <div class="form-group qualification-checks">
-              <label>자격 요건 자체 자가 진단 (해당되는 항목 체크)</label>
-              <div class="checkbox-list">
-                <label class="check-label">
-                  <input type="checkbox" id="chk-resident" name="chkResident">
-                  <span>서울·경기·인천 6개월 이상 거주 세대주입니다.</span>
-                </label>
-                <label class="check-label">
-                  <input type="checkbox" id="chk-house" name="chkHouse">
-                  <span>무주택 또는 전용면적 85㎡ 이하 1채 보유자입니다.</span>
-                </label>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="visit-date">홍보관(모델하우스) 방문희망 일시</label>
+                <input type="text" id="visit-date" name="visitDate" placeholder="예: 5월 15일 오후 2시 (또는 미정)">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="user-message">문의사항</label>
+                <textarea id="user-message" name="message" placeholder="궁금한 점을 남겨주세요." rows="4"></textarea>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>어디서 알게 되셨나요?</label>
+                <div class="funnel-chips">
+                  <label class="funnel-chip">
+                    <input type="checkbox" name="funnel" value="네이버 검색">
+                    <span>네이버 검색</span>
+                  </label>
+                  <label class="funnel-chip">
+                    <input type="checkbox" name="funnel" value="네이버 블로그">
+                    <span>네이버 블로그</span>
+                  </label>
+                  <label class="funnel-chip">
+                    <input type="checkbox" name="funnel" value="네이버 배너광고">
+                    <span>네이버 배너광고</span>
+                  </label>
+                  <label class="funnel-chip">
+                    <input type="checkbox" name="funnel" value="유튜브">
+                    <span>유튜브</span>
+                  </label>
+                  <label class="funnel-chip">
+                    <input type="checkbox" name="funnel" value="인스타그램">
+                    <span>인스타그램</span>
+                  </label>
+                  <label class="funnel-chip">
+                    <input type="checkbox" name="funnel" value="페이스북">
+                    <span>페이스북</span>
+                  </label>
+                  <label class="funnel-chip">
+                    <input type="checkbox" name="funnel" value="기타">
+                    <span>기타</span>
+                  </label>
+                </div>
               </div>
             </div>
 
@@ -768,16 +804,16 @@
               <div class="privacy-text-box">
                 <p><strong>[개인정보 수집 및 이용 동의 약관]</strong></p>
                 <p>1. 개인정보 수집 목적: 남성역 헤르니티 분양 정보 제공, 분양 일정 안내 및 유선 상담 전화 예약.</p>
-                <p>2. 수집하는 개인정보 항목: 성함, 연락처, 관심 평형.</p>
+                <p>2. 수집하는 개인정보 항목: 성함, 연락처, 관심 평형, 거주지, 방문희망일시, 문의사항, 인입경로.</p>
                 <p>3. 개인정보 보유 및 이용기간: 분양 종료 시 또는 본인 요청 시까지 즉시 파기.</p>
               </div>
               <label class="check-label privacy-agree">
                 <input type="checkbox" id="privacy-agree" required>
-                <span>개인정보 수집 및 이용에 동의합니다. <span class="required">(필수)</span></span>
+                <span>(필수) <span class="underline">개인정보 수집 및 이용</span>에 동의합니다</span>
               </label>
             </div>
 
-            <button type="submit" class="btn btn-submit">관심고객 등록 신청하기</button>
+            <button type="submit" class="btn btn-submit">상담 신청하기 <span class="arrow">→</span></button>
           </form>
         </div>
       </div>
