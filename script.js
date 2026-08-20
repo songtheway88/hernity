@@ -218,30 +218,20 @@ function initializeApp() {
       const funnelCheckboxes = interestForm.querySelectorAll('input[name="funnel"]:checked');
       const funnelValues = Array.from(funnelCheckboxes).map(cb => cb.value).join(', ') || '없음';
       
-      // Telegram Bot Details
-      const botToken = '8945070290:AAGVX0fHTNAC68BgBBP7DstL2V0PXxEa-wQ';
-      const chatId = '8753795118';
-      
-      const messageText = `✨ [남성역 헤르니티 관심고객 등록] ✨
---------------------------------
-👤 이름: ${nameInput.value.trim()}
-📞 연락처: ${formattedPhone}
-🏠 관심 평형: ${prefTypeText}
-📍 현재 거주지: ${residenceInput.value.trim() || '미입력'}
-📅 방문희망일시: ${visitDateInput.value.trim() || '미입력'}
-💬 문의사항: ${messageInput.value.trim() || '없음'}
-🔍 인입 경로: ${funnelValues}
---------------------------------
-📅 신청일시: ${new Date().toLocaleString('ko-KR')}`;
-      
-      fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+      // Send registration payload to Vercel Serverless Function (/api/send-telegram)
+      fetch('/api/send-telegram', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          chat_id: chatId,
-          text: messageText
+          name: nameInput.value.trim(),
+          phone: formattedPhone,
+          prefType: prefTypeText,
+          residence: residenceInput.value.trim(),
+          visitDate: visitDateInput.value.trim(),
+          message: messageInput.value.trim(),
+          funnel: funnelValues
         })
       })
       .then(response => {
