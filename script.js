@@ -2,7 +2,7 @@
    남성역 헤르니티 - Interactive Scripts
    ========================================== */
 
-document.addEventListener('DOMContentLoaded', () => {
+function initializeApp() {
   
   // 1. Sticky Header Scroll Effect
   const header = document.getElementById('header');
@@ -22,6 +22,18 @@ document.addEventListener('DOMContentLoaded', () => {
       topBtn.classList.remove('visible');
     }
   });
+
+  // 1-2. Hero Slideshow Auto-Play (2 Second Interval)
+  const heroSlides = document.querySelectorAll('.hero-slide');
+  let currentHeroSlideIndex = 0;
+  
+  if (heroSlides.length > 1) {
+    setInterval(() => {
+      heroSlides[currentHeroSlideIndex].classList.remove('active');
+      currentHeroSlideIndex = (currentHeroSlideIndex + 1) % heroSlides.length;
+      heroSlides[currentHeroSlideIndex].classList.add('active');
+    }, 2000);
+  }
 
   // 2. Mobile Hamburger Menu Toggle
   const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
@@ -56,6 +68,27 @@ document.addEventListener('DOMContentLoaded', () => {
       // Remove active states
       tabTriggers.forEach(t => t.classList.remove('active'));
       tabContents.forEach(c => c.classList.remove('active'));
+      
+      // Add active state to clicked tab & content
+      trigger.classList.add('active');
+      const targetContent = document.getElementById(targetId);
+      if (targetContent) {
+        targetContent.classList.add('active');
+      }
+    });
+  });
+
+  // 3-2. Map Gallery Tab System (Location Maps)
+  const mapTriggers = document.querySelectorAll('.map-tab-trigger');
+  const mapContents = document.querySelectorAll('.map-content');
+  
+  mapTriggers.forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const targetId = trigger.getAttribute('data-target');
+      
+      // Remove active states
+      mapTriggers.forEach(t => t.classList.remove('active'));
+      mapContents.forEach(c => c.classList.remove('active'));
       
       // Add active state to clicked tab & content
       trigger.classList.add('active');
@@ -252,4 +285,45 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
-});
+
+  // 7. Hero Overlay Questions Click Handling
+  const overlayQuestionBtns = document.querySelectorAll('.hero-question-action-btn');
+  const userMessageTextarea = document.getElementById('user-message');
+  const userNameInput = document.getElementById('user-name');
+  
+  overlayQuestionBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const question = btn.getAttribute('data-question');
+      
+      // Pre-fill textarea
+      if (userMessageTextarea) {
+        userMessageTextarea.value = question;
+      }
+      
+      // Scroll to contact form
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        const offset = header ? header.offsetHeight : 80;
+        const targetPosition = contactSection.getBoundingClientRect().top + window.scrollY - offset;
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+        
+        // Focus name input after scroll
+        setTimeout(() => {
+          if (userNameInput) {
+            userNameInput.focus();
+          }
+        }, 800);
+      }
+    });
+  });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeApp);
+} else {
+  initializeApp();
+}
