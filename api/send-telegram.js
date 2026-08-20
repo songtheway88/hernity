@@ -8,12 +8,15 @@ export default async function handler(req, res) {
     const { name, phone, prefType, residence, visitDate, message, funnel } = req.body || {};
 
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
-    const chatId = process.env.TELEGRAM_CHAT_ID;
+    const rawChatIds = process.env.TELEGRAM_CHAT_ID || process.env.TELEGRAM_CHAT_IDS || '';
 
-    if (!botToken || !chatId) {
+    if (!botToken || !rawChatIds) {
       console.error('Missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID in Vercel environment variables');
       return res.status(500).json({ error: 'Server configuration error: missing Telegram environment variables.' });
     }
+
+    // Support multiple Chat IDs split by comma
+    const chatIds = rawChatIds.split(',').map(id => id.trim()).filter(Boolean);
 
     const messageText = `✨ [남성역 헤르니티 관심고객 등록] ✨
 --------------------------------
@@ -27,27 +30,43 @@ export default async function handler(req, res) {
 --------------------------------
 📅 신청일시: ${new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })}`;
 
-    const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text: messageText
+    // Send messages in parallel to all chat IDs
+    const results = await Promise.allSettled(
+      chatIds.map(async (chatId) => {
+        const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            chat_id: chatId,
+            text: messageText
+          })
+        });
+        const data = await response.json();
+        if (!response.ok || !data.ok) {
+          throw new Error(`ChatID ${chatId} send failed: ${data.description || 'Unknown error'}`);
+        }
+        return data;
       })
-    });
+    );
 
-    const data = await response.json();
+    const fulfilledCount = results.filter(r => r.status === 'fulfilled').length;
+    const rejectedResults = results.filter(r => r.status === 'rejected');
 
-    if (!response.ok || !data.ok) {
-      console.error('Telegram API error:', data);
-      return res.status(500).json({ error: data.description || 'Telegram API request failed' });
+    if (rejectedResults.length > 0) {
+      console.warn('Some Telegram messages failed to send:', rejectedResults.map(r => r.reason?.message || r.reason));
     }
 
-    return res.status(200).json({ success: true });
+    // As long as at least one message was delivered, consider it successful
+    if (fulfilledCount > 0) {
+      return res.status(200).json({ success: true, deliveredCount: fulfilledCount });
+    } else {
+      return res.status(500).json({ error: 'Failed to send Telegram message to all recipients.' });
+    }
   } catch (error) {
     console.error('Internal Server Error in Telegram API:', error);
     return res.status(500).json({ error: 'Internal Server Error' });
   }
 }
+
