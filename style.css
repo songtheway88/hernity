@@ -1952,22 +1952,113 @@ section {
   }
   
   .hero-section {
-    min-height: auto;
-    padding-top: calc(var(--header-height) + 10px);
-    padding-bottom: 30px;
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    min-height: auto !important;
+    padding-top: calc(var(--header-height) + 15px) !important;
+    padding-bottom: 30px !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
   }
   
+  .hero-bg-slider {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 16 / 10 !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    margin-bottom: 20px !important;
+    z-index: 1 !important;
+    order: 1 !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4) !important;
+  }
+
+  .hero-slide {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
   .hero-slide-img {
-    object-fit: contain !important;
-    background-color: var(--bg-primary);
+    object-fit: cover !important;
+    width: 100% !important;
+    height: 100% !important;
   }
-  
+
+  .hero-bg-overlay {
+    display: none !important;
+  }
+
+  .hero-container {
+    position: relative !important;
+    width: 100% !important;
+    order: 2 !important;
+    z-index: 2 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .hero-text-center {
+    width: 100% !important;
+  }
+
   .hero-title-main {
-    font-size: 1.65rem;
-    line-height: 1.3;
-    margin-bottom: 15px;
+    font-size: 1.45rem !important;
+    line-height: 1.35 !important;
+    margin-bottom: 18px !important;
+    text-shadow: none !important;
+    word-break: keep-all !important;
+    text-wrap: balance !important;
   }
-  
+
+  /* Questions Box (15% Smaller on Mobile) */
+  .hero-questions-card {
+    max-width: 360px !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 16px 14px !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+  }
+
+  .hero-questions-card .card-header {
+    margin-bottom: 14px !important;
+  }
+
+  .phone-icon-circle {
+    width: 38px !important;
+    height: 38px !important;
+  }
+
+  .phone-icon-circle svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  .hero-questions-card .card-header h3 {
+    font-size: 1.15rem !important;
+    margin-top: 6px !important;
+    margin-bottom: 4px !important;
+  }
+
+  .hero-questions-card .card-header p {
+    font-size: 0.82rem !important;
+  }
+
+  .hero-question-action-btn {
+    padding: 9px 12px !important;
+    font-size: 0.82rem !important;
+    margin-bottom: 8px !important;
+    border-radius: 6px !important;
+  }
+
   .overview-cards {
     flex-direction: column;
   }
@@ -1978,7 +2069,7 @@ section {
   
   .unit-layout {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 25px;
   }
   
   .unit-visual {
@@ -1994,15 +2085,15 @@ section {
   }
   
   .unit-visual .visual-placeholder {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 16 / 11 !important;
     border-radius: 8px;
     overflow: hidden;
   }
   
   .unit-visual .visual-loaded-img {
-    object-fit: cover !important;
-    padding: 0 !important;
-    background-color: transparent !important;
+    object-fit: contain !important;
+    padding: 8px !important;
+    background-color: var(--bg-tertiary) !important;
   }
 
   .unit-visual .placeholder-border {
@@ -2069,9 +2160,9 @@ section {
 }
 
 .unit-visual .visual-loaded-img {
-  object-fit: contain;
-  background-color: var(--bg-secondary);
-  padding: 10px;
+  object-fit: contain !important;
+  background-color: var(--bg-secondary) !important;
+  padding: 10px !important;
 }
 
 /* Map Gallery Styles */
