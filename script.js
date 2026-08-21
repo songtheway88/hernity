@@ -4,67 +4,43 @@
 
 function initializeApp() {
   
-  // 0. 방문예약 날짜/시간 버튼 선택 로직
-  const dateGrid = document.getElementById('date-buttons-grid');
-  const timeGrid = document.getElementById('time-buttons-grid');
+  // 0. 방문예약 날짜/시간 피커 및 드롭다운 선택 로직
+  const visitDateSelect = document.getElementById('visit-date-select');
+  const visitTimeSelect = document.getElementById('visit-time-select');
   const visitDateInput = document.getElementById('visit-date');
   
-  let selectedDate = '';
-  let selectedTime = '';
-  
-  function updateVisitDate() {
-    if (selectedDate && selectedTime) {
-      visitDateInput.value = `${selectedDate} ${selectedTime}`;
-    } else {
-      visitDateInput.value = '';
+  if (visitDateSelect && visitTimeSelect && visitDateInput) {
+    // 과거 날짜 선택 방지를 위해 min 속성을 오늘 날짜로 지정
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    const todayStr = `${year}-${month}-${day}`;
+    visitDateSelect.setAttribute('min', todayStr);
+    
+    // YYYY-MM-DD -> YYYY. MM. DD. 변환 헬퍼
+    function formatKoreanDate(dateStr) {
+      if (!dateStr) return '';
+      const parts = dateStr.split('-');
+      if (parts.length === 3) {
+        return `${parts[0]}. ${parts[1]}. ${parts[2]}.`;
+      }
+      return dateStr;
     }
-  }
-
-  if (dateGrid && timeGrid && visitDateInput) {
-    const days = ['일', '월', '화', '수', '목', '금', '토'];
-    let dateHTML = '';
     
-    // 오늘부터 7일간의 날짜 동적 생성 (오늘 포함)
-    for (let i = 0; i < 7; i++) {
-      const d = new Date();
-      d.setDate(d.getDate() + i);
-      const year = d.getFullYear();
-      const month = String(d.getMonth() + 1).padStart(2, '0');
-      const dateVal = String(d.getDate()).padStart(2, '0');
-      const dayName = days[d.getDay()];
+    function updateVisitDateValue() {
+      const dateVal = visitDateSelect.value;
+      const timeVal = visitTimeSelect.value;
       
-      const formattedValue = `${year}. ${month}. ${dateVal}.`;
-      const displayLabel = `${month}/${dateVal}(${dayName})`;
-      
-      dateHTML += `
-        <button type="button" class="date-select-btn" data-value="${formattedValue}">
-          <span class="btn-date">${displayLabel}</span>
-        </button>
-      `;
+      if (dateVal && timeVal) {
+        visitDateInput.value = `${formatKoreanDate(dateVal)} ${timeVal}`;
+      } else {
+        visitDateInput.value = '';
+      }
     }
-    dateGrid.innerHTML = dateHTML;
     
-    // 날짜 버튼 클릭 이벤트
-    const dateButtons = dateGrid.querySelectorAll('.date-select-btn');
-    dateButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        dateButtons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        selectedDate = btn.getAttribute('data-value');
-        updateVisitDate();
-      });
-    });
-    
-    // 시간 버튼 클릭 이벤트
-    const timeButtons = timeGrid.querySelectorAll('.time-select-btn');
-    timeButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        timeButtons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        selectedTime = btn.getAttribute('data-value');
-        updateVisitDate();
-      });
-    });
+    visitDateSelect.addEventListener('change', updateVisitDateValue);
+    visitTimeSelect.addEventListener('change', updateVisitDateValue);
   }
 
   // 1. Sticky Header Scroll Effect
@@ -231,6 +207,8 @@ function initializeApp() {
       const prefTypeSelect = document.getElementById('pref-type');
       const residenceInput = document.getElementById('user-residence');
       const visitDateInput = document.getElementById('visit-date');
+      const visitDateSelect = document.getElementById('visit-date-select');
+      const visitTimeSelect = document.getElementById('visit-time-select');
       const messageInput = document.getElementById('user-message');
       const privacyAgreeCheckbox = document.getElementById('privacy-agree');
       const submitBtn = interestForm.querySelector('.btn-submit');
@@ -257,13 +235,15 @@ function initializeApp() {
         return;
       }
       
-      if (!selectedDate) {
+      if (!visitDateSelect.value) {
         showToast('방문예약일자를 선택해 주세요.', 'error');
+        visitDateSelect.focus();
         return;
       }
       
-      if (!selectedTime) {
+      if (!visitTimeSelect.value) {
         showToast('방문예약시간을 선택해 주세요.', 'error');
+        visitTimeSelect.focus();
         return;
       }
       

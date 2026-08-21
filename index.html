@@ -888,32 +888,28 @@
               </div>
             </div>
 
-            <div class="form-row">
+            <div class="form-row grid-2">
               <div class="form-group">
-                <label>방문예약일자 <span class="required">*</span></label>
-                <div id="date-buttons-grid" class="date-buttons-grid">
-                  <!-- JavaScript will dynamically render date buttons here -->
-                </div>
+                <label for="visit-date-select">방문예약일자 <span class="required">*</span></label>
+                <input type="date" id="visit-date-select" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="visit-time-select">방문예약시간 <span class="required">*</span></label>
+                <select id="visit-time-select" class="form-control" required>
+                  <option value="">-방문시간선택-</option>
+                  <option value="10시 이전">10시 이전</option>
+                  <option value="10:00 ~ 11:00">10:00 ~ 11:00</option>
+                  <option value="11:00 ~ 12:00">11:00 ~ 12:00</option>
+                  <option value="12:00 ~ 13:00">12:00 ~ 13:00</option>
+                  <option value="13:00 ~ 14:00">13:00 ~ 14:00</option>
+                  <option value="14:00 ~ 15:00">14:00 ~ 15:00</option>
+                  <option value="15:00 ~ 16:00">15:00 ~ 16:00</option>
+                  <option value="16:00 ~ 17:00">16:00 ~ 17:00</option>
+                  <option value="17:00 ~ 18:00">17:00 ~ 18:00</option>
+                </select>
               </div>
             </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label>방문예약시간 <span class="required">*</span></label>
-                <div id="time-buttons-grid" class="time-buttons-grid">
-                  <button type="button" class="time-select-btn" data-value="10시 이전">10시 이전</button>
-                  <button type="button" class="time-select-btn" data-value="10:00 ~ 11:00">10:00 ~ 11:00</button>
-                  <button type="button" class="time-select-btn" data-value="11:00 ~ 12:00">11:00 ~ 12:00</button>
-                  <button type="button" class="time-select-btn" data-value="12:00 ~ 13:00">12:00 ~ 13:00</button>
-                  <button type="button" class="time-select-btn" data-value="13:00 ~ 14:00">13:00 ~ 14:00</button>
-                  <button type="button" class="time-select-btn" data-value="14:00 ~ 15:00">14:00 ~ 15:00</button>
-                  <button type="button" class="time-select-btn" data-value="15:00 ~ 16:00">15:00 ~ 16:00</button>
-                  <button type="button" class="time-select-btn" data-value="16:00 ~ 17:00">16:00 ~ 17:00</button>
-                  <button type="button" class="time-select-btn" data-value="17:00 ~ 18:00">17:00 ~ 18:00</button>
-                </div>
-                <input type="hidden" id="visit-date" name="visitDate">
-              </div>
-            </div>
+            <input type="hidden" id="visit-date" name="visitDate">
 
             <div class="form-row">
               <div class="form-group">
