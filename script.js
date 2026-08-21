@@ -41,6 +41,17 @@ function initializeApp() {
     
     visitDateSelect.addEventListener('change', updateVisitDateValue);
     visitTimeSelect.addEventListener('change', updateVisitDateValue);
+    
+    // 강제 달력 트리거 (모바일/PC 크롬 & 사파리 16+)
+    visitDateSelect.addEventListener('click', () => {
+      try {
+        if (typeof visitDateSelect.showPicker === 'function') {
+          visitDateSelect.showPicker();
+        }
+      } catch (err) {
+        console.warn("showPicker not supported", err);
+      }
+    });
   }
 
   // 1. Sticky Header Scroll Effect
