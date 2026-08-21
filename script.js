@@ -276,40 +276,6 @@ function initializeApp() {
     });
   }
 
-  // 7. Hero Overlay Questions Click Handling
-  const overlayQuestionBtns = document.querySelectorAll('.hero-question-action-btn');
-  const userMessageTextarea = document.getElementById('user-message');
-  const userNameInput = document.getElementById('user-name');
-  
-  overlayQuestionBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const question = btn.getAttribute('data-question');
-      
-      // Pre-fill textarea
-      if (userMessageTextarea) {
-        userMessageTextarea.value = question;
-      }
-      
-      // Scroll to contact form
-      const contactSection = document.getElementById('contact');
-      if (contactSection) {
-        const offset = header ? header.offsetHeight : 80;
-        const targetPosition = contactSection.getBoundingClientRect().top + window.scrollY - offset;
-        
-        window.scrollTo({
-          top: targetPosition,
-          behavior: 'smooth'
-        });
-        
-        // Focus name input after scroll
-        setTimeout(() => {
-          if (userNameInput) {
-            userNameInput.focus();
-          }
-        }, 800);
-      }
-    });
-  });
 
   // 8. Image Lightbox Modal System
   const imgModal = document.getElementById('image-modal');

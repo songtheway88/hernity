@@ -587,6 +587,7 @@ section {
   display: flex;
   align-items: center;
   box-sizing: border-box;
+  text-decoration: none;
 }
 
 .hero-question-action-btn .bullet {
