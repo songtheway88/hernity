@@ -310,6 +310,46 @@ function initializeApp() {
       }
     });
   });
+
+  // 8. Image Lightbox Modal System
+  const imgModal = document.getElementById('image-modal');
+  const imgModalImg = document.getElementById('image-modal-img');
+  const imgModalCaption = document.getElementById('image-modal-caption');
+  const imgModalClose = document.getElementById('image-modal-close');
+  
+  if (imgModal && imgModalImg && imgModalClose) {
+    const zoomableImages = document.querySelectorAll('.gallery-map-img, .dev-banner-img, .visual-loaded-img');
+    
+    zoomableImages.forEach(img => {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', () => {
+        imgModal.style.display = 'flex';
+        imgModalImg.src = img.src;
+        imgModalCaption.textContent = img.alt || '';
+        imgModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+    
+    const closeModal = () => {
+      imgModal.style.display = 'none';
+      imgModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    };
+    
+    imgModalClose.addEventListener('click', closeModal);
+    imgModal.addEventListener('click', (e) => {
+      if (e.target === imgModal) {
+        closeModal();
+      }
+    });
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && imgModal.style.display === 'flex') {
+        closeModal();
+      }
+    });
+  }
 }
 
 if (document.readyState === 'loading') {
