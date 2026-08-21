@@ -2609,3 +2609,96 @@ section {
   }
 }
 
+/* ===== VISIT RESERVATION BUTTON SELECTORS ===== */
+.date-buttons-grid,
+.time-buttons-grid {
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
+  width: 100%;
+}
+
+.date-buttons-grid {
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.time-buttons-grid {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.date-select-btn,
+.time-select-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color-light);
+  border-radius: 6px;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast) ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  padding: 6px;
+}
+
+.date-select-btn .btn-date {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Hover State */
+.date-select-btn:hover,
+.time-select-btn:hover {
+  border-color: var(--gold);
+  background: rgba(163, 132, 115, 0.1);
+}
+
+/* Active / Selected State */
+.date-select-btn.active,
+.time-select-btn.active {
+  background: var(--gold) !important;
+  border-color: var(--gold) !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(163, 132, 115, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Press effect */
+.date-select-btn:active,
+.time-select-btn:active {
+  transform: scale(0.97);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .date-buttons-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .time-buttons-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .date-select-btn,
+  .time-select-btn {
+    height: 48px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .date-buttons-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .date-select-btn,
+  .time-select-btn {
+    font-size: 0.8rem;
+    padding: 4px;
+  }
+}
+
+

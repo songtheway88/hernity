@@ -4,6 +4,69 @@
 
 function initializeApp() {
   
+  // 0. 방문예약 날짜/시간 버튼 선택 로직
+  const dateGrid = document.getElementById('date-buttons-grid');
+  const timeGrid = document.getElementById('time-buttons-grid');
+  const visitDateInput = document.getElementById('visit-date');
+  
+  let selectedDate = '';
+  let selectedTime = '';
+  
+  function updateVisitDate() {
+    if (selectedDate && selectedTime) {
+      visitDateInput.value = `${selectedDate} ${selectedTime}`;
+    } else {
+      visitDateInput.value = '';
+    }
+  }
+
+  if (dateGrid && timeGrid && visitDateInput) {
+    const days = ['일', '월', '화', '수', '목', '금', '토'];
+    let dateHTML = '';
+    
+    // 오늘부터 7일간의 날짜 동적 생성 (오늘 포함)
+    for (let i = 0; i < 7; i++) {
+      const d = new Date();
+      d.setDate(d.getDate() + i);
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const dateVal = String(d.getDate()).padStart(2, '0');
+      const dayName = days[d.getDay()];
+      
+      const formattedValue = `${year}. ${month}. ${dateVal}.`;
+      const displayLabel = `${month}/${dateVal}(${dayName})`;
+      
+      dateHTML += `
+        <button type="button" class="date-select-btn" data-value="${formattedValue}">
+          <span class="btn-date">${displayLabel}</span>
+        </button>
+      `;
+    }
+    dateGrid.innerHTML = dateHTML;
+    
+    // 날짜 버튼 클릭 이벤트
+    const dateButtons = dateGrid.querySelectorAll('.date-select-btn');
+    dateButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        dateButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedDate = btn.getAttribute('data-value');
+        updateVisitDate();
+      });
+    });
+    
+    // 시간 버튼 클릭 이벤트
+    const timeButtons = timeGrid.querySelectorAll('.time-select-btn');
+    timeButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        timeButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedTime = btn.getAttribute('data-value');
+        updateVisitDate();
+      });
+    });
+  }
+
   // 1. Sticky Header Scroll Effect
   const header = document.getElementById('header');
   const topBtn = document.getElementById('top-btn');
@@ -191,6 +254,16 @@ function initializeApp() {
       if (!prefTypeSelect.value) {
         showToast('관심 평형을 선택해 주세요.', 'error');
         prefTypeSelect.focus();
+        return;
+      }
+      
+      if (!selectedDate) {
+        showToast('방문예약일자를 선택해 주세요.', 'error');
+        return;
+      }
+      
+      if (!selectedTime) {
+        showToast('방문예약시간을 선택해 주세요.', 'error');
         return;
       }
       

@@ -890,8 +890,28 @@
 
             <div class="form-row">
               <div class="form-group">
-                <label for="visit-date">홍보관(모델하우스) 방문희망 일시</label>
-                <input type="text" id="visit-date" name="visitDate" placeholder="예: 5월 15일 오후 2시 (또는 미정)">
+                <label>방문예약일자 <span class="required">*</span></label>
+                <div id="date-buttons-grid" class="date-buttons-grid">
+                  <!-- JavaScript will dynamically render date buttons here -->
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>방문예약시간 <span class="required">*</span></label>
+                <div id="time-buttons-grid" class="time-buttons-grid">
+                  <button type="button" class="time-select-btn" data-value="10시 이전">10시 이전</button>
+                  <button type="button" class="time-select-btn" data-value="10:00 ~ 11:00">10:00 ~ 11:00</button>
+                  <button type="button" class="time-select-btn" data-value="11:00 ~ 12:00">11:00 ~ 12:00</button>
+                  <button type="button" class="time-select-btn" data-value="12:00 ~ 13:00">12:00 ~ 13:00</button>
+                  <button type="button" class="time-select-btn" data-value="13:00 ~ 14:00">13:00 ~ 14:00</button>
+                  <button type="button" class="time-select-btn" data-value="14:00 ~ 15:00">14:00 ~ 15:00</button>
+                  <button type="button" class="time-select-btn" data-value="15:00 ~ 16:00">15:00 ~ 16:00</button>
+                  <button type="button" class="time-select-btn" data-value="16:00 ~ 17:00">16:00 ~ 17:00</button>
+                  <button type="button" class="time-select-btn" data-value="17:00 ~ 18:00">17:00 ~ 18:00</button>
+                </div>
+                <input type="hidden" id="visit-date" name="visitDate">
               </div>
             </div>
 
