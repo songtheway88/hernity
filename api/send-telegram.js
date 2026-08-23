@@ -1,3 +1,67 @@
+// 폼의 인입경로(한글) → 분양천국 대시보드가 이해하는 utm_source로 매핑
+const SOURCE_TO_UTM_SOURCE = {
+  '네이버 검색': 'naver',
+  '네이버 블로그': 'naver',
+  '네이버 배너광고': 'naver',
+  '유튜브': 'youtube',
+  '인스타그램': 'instagram',
+  '페이스북': 'facebook',
+};
+
+function resolveUtmSource(funnel) {
+  if (!funnel) return 'other';
+  const values = funnel.split(',').map((v) => v.trim());
+  for (const v of values) {
+    if (SOURCE_TO_UTM_SOURCE[v]) return SOURCE_TO_UTM_SOURCE[v];
+  }
+  return 'other';
+}
+
+// 분양천국 대시보드로 리드 전송 (고객DB 적재 + 담당자 문자 알림).
+// 텔레그램 발송과 무관하게 별도로 동작하며, 실패해도 상담 신청 흐름에는 영향 없음.
+async function sendToDashboard({ name, phone, prefType, residence, visitDate, message, funnel }) {
+  const dashboardUrl = process.env.DASHBOARD_INTAKE_URL; // 예: https://bunyang-dashboard.vercel.app/api/leads/intake
+  const apiKey = process.env.DASHBOARD_API_KEY; // 현장(헤르니티) 전용 API 키
+
+  if (!dashboardUrl || !apiKey) {
+    throw new Error('DASHBOARD_INTAKE_URL 또는 DASHBOARD_API_KEY 환경변수가 없습니다.');
+  }
+
+  const combinedMessage = visitDate
+    ? `[방문희망: ${visitDate}] ${message || ''}`.trim()
+    : (message || '');
+
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 8000);
+
+  try {
+    const response = await fetch(dashboardUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+      },
+      body: JSON.stringify({
+        name,
+        phone,
+        pyeong_type: prefType,
+        region: residence,
+        message: combinedMessage,
+        utm_source: resolveUtmSource(funnel),
+        utm_medium: 'landing_form',
+      }),
+      signal: controller.signal,
+    });
+
+    if (!response.ok) {
+      const body = await response.text().catch(() => '');
+      throw new Error(`Dashboard intake failed: ${response.status} ${body}`);
+    }
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
 export default async function handler(req, res) {
   // Only allow POST requests
   if (req.method !== 'POST') {
@@ -6,6 +70,13 @@ export default async function handler(req, res) {
 
   try {
     const { name, phone, prefType, residence, visitDate, message, funnel } = req.body || {};
+
+    // 분양천국 대시보드로 전송 (설정되어 있을 때). 텔레그램과 독립적으로 처리.
+    try {
+      await sendToDashboard({ name, phone, prefType, residence, visitDate, message, funnel });
+    } catch (dashboardErr) {
+      console.error('Dashboard intake error:', dashboardErr);
+    }
 
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
     const rawChatIds = process.env.TELEGRAM_CHAT_ID || process.env.TELEGRAM_CHAT_IDS || '';
