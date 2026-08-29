@@ -71,11 +71,13 @@ export default async function handler(req, res) {
   try {
     const { name, phone, prefType, residence, visitDate, message, funnel } = req.body || {};
 
-    // 분양천국 대시보드로 전송 (설정되어 있을 때). 텔레그램과 독립적으로 처리.
+    // 대시보드 전송이 성공하면 대시보드가 자체적으로 텔레그램까지 보내주므로(project.telegram_bot_token
+    // 기준), 중복 발송을 피하기 위해 대시보드 실패시에만 아래 직접 발송으로 폴백한다.
     try {
       await sendToDashboard({ name, phone, prefType, residence, visitDate, message, funnel });
+      return res.status(200).json({ success: true, via: 'dashboard' });
     } catch (dashboardErr) {
-      console.error('Dashboard intake error:', dashboardErr);
+      console.error('Dashboard intake error, falling back to direct Telegram send:', dashboardErr);
     }
 
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
