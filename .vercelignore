@@ -1,1 +1,7 @@
 tools
+.env*
+*.md
+*.md.txt
+.DS_Store
+.playwright-mcp
+.gemini
