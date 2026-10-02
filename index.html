@@ -47,6 +47,7 @@
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="style.css?v=14">
+  <link rel="stylesheet" href="board/board.css?v=15">
 
   <!-- Structured Data (JSON-LD) for SEO -->
   <script type="application/ld+json">
@@ -54,7 +55,7 @@
     "@context": "https://schema.org",
     "@type": "RealEstateAgent",
     "name": "남성역 헤르니티 분양 정보 홈페이지",
-    "image": "https://www.xn--q20b93bn3jn0if7fdzvexe.com/assets/images/og-image.jpg",
+    "image": "https://www.xn--q20b93bn3jn0if7fdzvexe.com/img/og-image.jpg",
     "@id": "https://www.xn--q20b93bn3jn0if7fdzvexe.com/#agent",
     "url": "https://www.xn--q20b93bn3jn0if7fdzvexe.com/",
     "telephone": "1844-0147",
@@ -135,6 +136,12 @@
       {
         "@type": "SiteNavigationElement",
         "position": 7,
+        "name": "분양소식",
+        "url": "https://www.xn--q20b93bn3jn0if7fdzvexe.com/board/"
+      },
+      {
+        "@type": "SiteNavigationElement",
+        "position": 8,
         "name": "관심고객등록",
         "url": "https://www.xn--q20b93bn3jn0if7fdzvexe.com/#contact"
       }
@@ -158,6 +165,7 @@
         <a href="#strategy" class="nav-link">특화설계</a>
         <a href="#community" class="nav-link">커뮤니티</a>
         <a href="#more-info" class="nav-link">더 알아보기</a>
+        <a href="/board/" class="nav-link">분양소식</a>
         <a href="#contact" class="nav-link highlight-menu">관심고객등록</a>
       </nav>
       <div class="header-right">
@@ -185,6 +193,7 @@
         <a href="#strategy" class="mobile-link">특화설계</a>
         <a href="#community" class="mobile-link">커뮤니티</a>
         <a href="#more-info" class="mobile-link">더 알아보기</a>
+        <a href="/board/" class="mobile-link">분양소식</a>
         <a href="#contact" class="mobile-link">관심고객등록</a>
       </nav>
       <a href="tel:1844-0147" class="mobile-call-btn">
@@ -837,6 +846,27 @@
     </div>
   </section>
 
+  <!-- BOARD:START (tools/build_board.py 가 자동 생성) -->
+  <section class="home-board-section" id="board">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-badge">NOTICE</span>
+        <h2 class="section-title">남성역 헤르니티 <span class="gold-text">분양소식</span></h2>
+        <div class="title-bar"></div>
+      </div>
+      <ul class="home-board-list">
+            <li><span class="notice-tag">공지</span><a href="/board/model-house/">남성역 헤르니티 모델하우스 위치, 운영시간, 방문 예약 방법</a><time datetime="2026-10-02">2026.10.02</time></li>
+            <li><span class="notice-tag">공지</span><a href="/board/sale-price/">남성역 헤르니티 분양가 | 59㎡·84㎡·106㎡ 타입별 예상 공급가 정리</a><time datetime="2026-10-02">2026.10.02</time></li>
+            <li><span class="notice-tag">공지</span><a href="/board/project-overview/">남성역 헤르니티 사업개요 | 1,210세대, 최고 37층, 7개동</a><time datetime="2026-10-02">2026.10.02</time></li>
+            <li><span class="notice-tag">공지</span><a href="/board/progress/">남성역 헤르니티 사업진행 상황 | 지금 어디까지 진행됐을까?</a><time datetime="2026-10-02">2026.10.02</time></li>
+            <li><span class="notice-tag">공지</span><a href="/board/move-in/">남성역 헤르니티 입주시기는 언제? 지역주택조합 일정으로 보는 입주 시점</a><time datetime="2026-10-02">2026.10.02</time></li>
+            <li><span class="notice-tag">공지</span><a href="/board/member-qualification/">남성역 헤르니티 조합원 자격 조건 | 무주택·85㎡ 이하 1주택 가능</a><time datetime="2026-10-02">2026.10.02</time></li>
+      </ul>
+      <p class="board-more"><a href="/board/">분양소식 전체 보기 →</a></p>
+    </div>
+  </section>
+  <!-- BOARD:END -->
+
   <!-- Contact Form Section -->
   <section class="contact-section" id="contact">
     <div class="contact-bg-glow"></div>
@@ -987,6 +1017,7 @@
           <a href="#units">타입안내</a>
           <a href="#development">개발호재</a>
           <a href="#more-info">더 알아보기</a>
+          <a href="/board/">분양소식</a>
           <a href="#contact">관심고객등록</a>
         </div>
       </div>

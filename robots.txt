@@ -1,10 +1,10 @@
 User-agent: *
 Allow: /
+Disallow: /tools/
 
 User-agent: Yeti
 Allow: /
+Disallow: /tools/
 
-Sitemap: https://xn--q20b93bn3jn0if7fdzvexe.com/sitemap.xml
-Sitemap: https://xn--q20b93bn3jn0if7fdzvexe.com/rss.xml
 Sitemap: https://www.xn--q20b93bn3jn0if7fdzvexe.com/sitemap.xml
 Sitemap: https://www.xn--q20b93bn3jn0if7fdzvexe.com/rss.xml
