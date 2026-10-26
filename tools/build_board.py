@@ -50,7 +50,7 @@ def fmt_date(d):
     return d.replace("-", ".")
 
 
-def head(title, description, canonical, keywords="", og_image=f"{SITE}/img/og-image.jpg", og_type="website", ld=()):
+def head(title, description, canonical, keywords="", og_image=f"{SITE}/img/og-image.jpg", og_type="website", ld=(), robots="index, follow"):
     ld_html = "\n".join(
         f'  <script type="application/ld+json">\n{json.dumps(x, ensure_ascii=False, indent=2)}\n  </script>' for x in ld
     )
@@ -69,7 +69,7 @@ def head(title, description, canonical, keywords="", og_image=f"{SITE}/img/og-im
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta name="theme-color" content="#ffffff">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="{robots}">
   <title>{esc(title)}</title>
   <meta name="description" content="{esc(description)}">{kw}
   <link rel="canonical" href="{canonical}">
@@ -142,6 +142,7 @@ def footer():
           <a href="/#units">타입안내</a>
           <a href="/board/">분양소식</a>
           <a href="/#contact">관심고객등록</a>
+          <a href="/privacy/"><strong>개인정보처리방침</strong></a>
         </div>
       </div>
       <hr class="footer-divider">
@@ -401,6 +402,102 @@ def write(rel, content):
         f.write(content)
 
 
+PRIVACY_EFFECTIVE = "2026-10-26"
+
+
+def build_privacy():
+    url = f"{SITE}/privacy/"
+    title = "개인정보처리방침 | 남성역 헤르니티"
+    desc = "남성역 헤르니티 홈페이지 및 Meta(페이스북·인스타그램) 인스턴트 양식 광고의 개인정보 수집·이용·보관·파기 안내."
+    out = head(title, desc, url, robots="noindex, follow")
+    out += header()
+    out += f"""
+  <main class="board-main">
+    <div class="board-container">
+      <nav class="breadcrumb" aria-label="breadcrumb"><a href="/">홈</a> › <span>개인정보처리방침</span></nav>
+      <article class="post privacy">
+        <header class="post-header">
+          <h1 class="post-title">개인정보처리방침</h1>
+          <p class="post-meta">시행일: {fmt_date(PRIVACY_EFFECTIVE)}</p>
+        </header>
+        <div class="post-body">
+<p class="lead">바이럴러스(이하 "회사")는 남성역 헤르니티 조합원 모집 홍보를 위해 운영하는 홈페이지(www.남성역헤르니티.com) 및 Meta(페이스북·인스타그램) 인스턴트 양식 광고를 통해 수집하는 개인정보를 「개인정보 보호법」 등 관련 법령에 따라 안전하게 처리합니다.</p>
+
+<h2>1. 수집하는 개인정보 항목 및 수집 방법</h2>
+<table class="post-table">
+  <tbody>
+    <tr><th>필수 항목</th><td>이름, 휴대전화번호</td></tr>
+    <tr><th>선택 항목</th><td>관심 평형, 거주 지역, 방문 희망 일시, 문의 내용, 인입 경로</td></tr>
+    <tr><th>수집 방법</th><td>Meta 인스턴트 양식(리드 광고), 홈페이지 관심고객 등록·질문하기 양식, 전화 상담</td></tr>
+  </tbody>
+</table>
+<p class="note">※ 실제 수집 항목은 각 양식에 표시된 항목에 한합니다.</p>
+
+<h2>2. 개인정보의 수집·이용 목적</h2>
+<ul>
+  <li>남성역 헤르니티 조합원 모집 관련 상담 및 문의 답변</li>
+  <li>홍보관 방문 예약 안내 및 일정 연락</li>
+  <li>사업 진행 소식 등 관련 정보 안내(전화·문자)</li>
+</ul>
+
+<h2>3. 개인정보의 보유 및 이용 기간</h2>
+<p>수집한 개인정보는 <strong>조합원 모집 종료 시 또는 정보주체가 삭제를 요청한 때 지체 없이 파기</strong>합니다. 다만 관계 법령에 따라 보존이 필요한 경우 해당 법령에서 정한 기간 동안 보관합니다.</p>
+
+<h2>4. 개인정보의 제3자 제공</h2>
+<p>회사는 정보주체의 동의를 받은 범위 안에서만 개인정보를 제공하며, 상담 진행을 위해 아래와 같이 제공합니다.</p>
+<table class="post-table">
+  <thead><tr><th>제공받는 자</th><th>제공 목적</th><th>제공 항목</th><th>보유 기간</th></tr></thead>
+  <tbody>
+    <tr><td>남성역지역주택조합추진위원회 및 홍보관 상담 담당자</td><td>조합원 모집 상담 및 방문 예약 안내</td><td>이름, 휴대전화번호, 문의 내용 등 양식 입력 항목</td><td>모집 종료 또는 삭제 요청 시까지</td></tr>
+  </tbody>
+</table>
+
+<h2>5. 개인정보 처리의 위탁</h2>
+<table class="post-table">
+  <thead><tr><th>수탁자</th><th>위탁 업무</th></tr></thead>
+  <tbody>
+    <tr><td>Meta Platforms, Inc.</td><td>인스턴트 양식(리드 광고)을 통한 정보 수집 및 전달</td></tr>
+    <tr><td>Vercel Inc.</td><td>홈페이지 호스팅 및 양식 전송 처리</td></tr>
+    <tr><td>고객관리(CRM)·문자 알림 시스템 운영사</td><td>상담 신청 정보 저장 및 담당자 알림</td></tr>
+  </tbody>
+</table>
+<p>일부 수탁자는 해외에 서버를 두고 있어 정보가 국외로 이전될 수 있으며, 회사는 수탁자가 개인정보를 안전하게 처리하도록 관리·감독합니다.</p>
+
+<h2>6. 개인정보의 파기 절차 및 방법</h2>
+<p>보유 기간이 끝나거나 처리 목적이 달성된 개인정보는 지체 없이 파기합니다. 전자적 파일은 복구할 수 없는 방법으로 삭제하고, 종이 문서는 분쇄하거나 소각합니다.</p>
+
+<h2>7. 정보주체의 권리와 행사 방법</h2>
+<p>정보주체는 언제든지 자신의 개인정보 열람, 정정, 삭제, 처리정지 및 동의 철회를 요구할 수 있습니다. 아래 개인정보 보호책임자에게 전화나 이메일로 요청하시면 지체 없이 조치합니다. 동의를 거부할 권리가 있으며, 거부 시 상담 신청이 제한될 수 있습니다.</p>
+
+<h2>8. 개인정보의 안전성 확보 조치</h2>
+<ul>
+  <li>개인정보 접근 권한을 상담 담당자로 최소화</li>
+  <li>전송 구간 암호화(HTTPS) 적용</li>
+  <li>접근 기록 관리 및 담당자 교육</li>
+</ul>
+
+<h2>9. 개인정보 보호책임자</h2>
+<table class="post-table">
+  <tbody>
+    <tr><th>성명</th><td>송덕일 (바이럴러스 대표)</td></tr>
+    <tr><th>연락처</th><td><a href="tel:010-4487-4468">010-4487-4468</a></td></tr>
+    <tr><th>이메일</th><td><a href="mailto:viralers@naver.com">viralers@naver.com</a></td></tr>
+    <tr><th>사업자등록번호</th><td>302-08-96000</td></tr>
+  </tbody>
+</table>
+<p>개인정보 침해에 대한 신고나 상담이 필요하시면 개인정보침해신고센터(국번 없이 118, privacy.kisa.or.kr), 개인정보분쟁조정위원회(1833-6972, www.kopico.go.kr)에 문의하실 수 있습니다.</p>
+
+<h2>10. 개인정보처리방침의 변경</h2>
+<p>이 개인정보처리방침은 {fmt_date(PRIVACY_EFFECTIVE)}부터 적용되며, 내용이 변경되는 경우 홈페이지를 통해 공지합니다.</p>
+        </div>
+      </article>
+    </div>
+  </main>
+"""
+    out += footer()
+    return out
+
+
 def main():
     slugs = [p["slug"] for p in POSTS]
     assert len(slugs) == len(set(slugs)), "slug 중복"
@@ -415,6 +512,7 @@ def main():
         write(f"board/{p['slug']}/index.html", build_post(p))
     write("sitemap.xml", build_sitemap())
     write("rss.xml", build_rss())
+    write("privacy/index.html", build_privacy())
     update_home()
     print(f"게시판 생성 완료: 글 {len(POSTS)}개")
 
