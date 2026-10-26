@@ -21,7 +21,7 @@ SITE = "https://www.xn--q20b93bn3jn0if7fdzvexe.com"
 SITE_NAME = "남성역 헤르니티"
 TEL = "1844-0147"
 KST = timezone(timedelta(hours=9))
-ASSET_VER = "15"
+ASSET_VER = "20"
 
 PHONE_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{cls}"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>'
 
@@ -67,7 +67,8 @@ def head(title, description, canonical, keywords="", og_image=f"{SITE}/img/og-im
     gtag('config', 'G-YJTFFVD8ZL');
   </script>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
   <meta name="robots" content="index, follow">
   <title>{esc(title)}</title>
   <meta name="description" content="{esc(description)}">{kw}
@@ -85,6 +86,9 @@ def head(title, description, canonical, keywords="", og_image=f"{SITE}/img/og-im
   <meta property="twitter:image" content="{og_image}">
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700&display=swap">
   <link rel="stylesheet" href="/style.css?v={ASSET_VER}">
   <link rel="stylesheet" href="/board/board.css?v={ASSET_VER}">
 {ld_html}

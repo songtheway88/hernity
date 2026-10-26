@@ -11,8 +11,9 @@
     gtag('config', 'G-YJTFFVD8ZL');
   </script>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#ffffff">
   <meta name="naver-site-verification" content="da1bceebe0f873a716aaa17dc882253d0b9656f3" />
   <meta name="naver-site-verification" content="4399a29b1edcbb78880a95e176c092aa68be2cd8" />
   
@@ -46,9 +47,13 @@
   <!-- Pretendard Premium Web Font -->
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700&display=swap">
+
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="style.css?v=14">
-  <link rel="stylesheet" href="board/board.css?v=15">
+  <link rel="stylesheet" href="style.css?v=20">
+  <link rel="stylesheet" href="board/board.css?v=20">
 
   <!-- Structured Data (JSON-LD) for SEO -->
   <script type="application/ld+json">
@@ -266,86 +271,52 @@
     </div>
   </section>
 
-  <!-- Overview Section -->
-  <section class="overview-section" id="overview">
+  <!-- Ask Question Section -->
+  <section class="ask-section" id="ask">
+    <div class="section-container">
+      <div class="ask-card">
+        <div class="ask-head">
+          <span class="section-badge">Q&amp;A</span>
+          <h2 class="ask-title">궁금한 점을 질문하세요</h2>
+          <p class="ask-desc">궁금하신점을 남겨주시면, 전문 상담사가 답을 드려요!</p>
+        </div>
+        <form id="ask-form" class="ask-form" novalidate>
+          <div class="form-group">
+            <label for="ask-question">질문 <span class="required">*</span></label>
+            <textarea id="ask-question" name="question" rows="3" placeholder="예) 조합원 자격이 되는지 궁금해요" required></textarea>
+          </div>
+          <div class="form-row grid-2">
+            <div class="form-group">
+              <label for="ask-name">이름 <span class="required">*</span></label>
+              <input type="text" id="ask-name" name="name" placeholder="홍길동" autocomplete="name" required>
+            </div>
+            <div class="form-group">
+              <label for="ask-phone">전화번호 <span class="required">*</span></label>
+              <input type="tel" id="ask-phone" name="phone" placeholder="010-0000-0000" inputmode="numeric" autocomplete="tel" required>
+            </div>
+          </div>
+          <label class="check-label ask-privacy">
+            <input type="checkbox" id="ask-privacy" required>
+            <span>(필수) 상담 답변을 위한 개인정보(이름, 연락처, 질문) 수집·이용에 동의합니다. 보유기간: 모집 종료 또는 요청 시 즉시 파기</span>
+          </label>
+          <button type="submit" class="btn btn-submit">질문 남기기 <span class="arrow">→</span></button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Promo Video Section -->
+  <section class="video-section" id="video">
     <div class="section-container">
       <div class="section-header">
-        <span class="section-badge">PROJECT OVERVIEW</span>
-        <h2 class="section-title">남성역 헤르니티 <span class="gold-text">사업 개요</span></h2>
+        <span class="section-badge">PROMOTION FILM</span>
+        <h2 class="section-title">남성역 헤르니티 <span class="gold-text">홍보영상 보러가기</span></h2>
         <div class="title-bar"></div>
-        <p class="section-desc">남성역 헤르니티의 대단지 사업 수치, 타입별 평면도, 분양가 관련 안내 및 모델하우스 방문 상담 예약 주요 정보를 한눈에 확인하실 수 있습니다.</p>
       </div>
-
-      <div class="overview-grid">
-        <div class="overview-info">
-          <table class="overview-table">
-            <tbody>
-              <tr>
-                <th>사업명</th>
-                <td>남성역 헤르니티 (구 남성역 동양라파크 사당)</td>
-              </tr>
-              <tr>
-                <th>위치</th>
-                <td>서울특별시 동작구 사당동 235-53번지 일원</td>
-              </tr>
-              <tr>
-                <th>대지면적</th>
-                <td>31,856.80 ㎡ (9,636.68평)</td>
-              </tr>
-              <tr>
-                <th>건축면적</th>
-                <td>8,878.67 ㎡ (2,685.80평)</td>
-              </tr>
-              <tr>
-                <th>연면적</th>
-                <td>199,162.94 ㎡ (60,246.79평)</td>
-              </tr>
-              <tr>
-                <th>건폐율 / 용적률</th>
-                <td>27.87% / 409.12%</td>
-              </tr>
-              <tr>
-                <th>건축규모</th>
-                <td>지하 4층 ~ 지상 최대 37층, 7개동</td>
-              </tr>
-              <tr>
-                <th>전체 세대수</th>
-                <td>총 1,210세대 (SHIFT 임대 포함)</td>
-              </tr>
-              <tr>
-                <th>시행사 (사업주체)</th>
-                <td>남성역지역주택조합추진위원회</td>
-              </tr>
-              <tr>
-                <th>자금대리사무사</th>
-                <td>코람코자산신탁 (신탁사)</td>
-              </tr>
-              <tr>
-                <th>시공참여의향사</th>
-                <td>GS건설</td>
-              </tr>
-              <tr>
-                <th>인허가 · 설계</th>
-                <td>한국종합건축사사무소 (코리아그룹)</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="overview-cards">
-          <div class="stat-card">
-            <div class="stat-num">1,210</div>
-            <div class="stat-label">전체 총 세대수</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-num">37<span class="unit">층</span></div>
-            <div class="stat-label">지상 최고 층수</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-num">97<span class="unit">%</span></div>
-            <div class="stat-label">남향 위주(남동·남서향) 배치율</div>
-          </div>
-        </div>
+      <div class="video-frame">
+        <iframe src="https://www.youtube-nocookie.com/embed/KQ2pVJ5_h2s?start=8&amp;rel=0&amp;playsinline=1" title="남성역 헤르니티 홍보영상" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
+      <p class="video-link"><a href="https://www.youtube.com/watch?v=KQ2pVJ5_h2s&amp;t=8s" target="_blank" rel="noopener noreferrer">유튜브에서 보기 →</a></p>
     </div>
   </section>
 
@@ -360,81 +331,80 @@
       </div>
 
       <div class="premium-grid">
-        <div class="premium-card">
-          <div class="card-icon-container">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="card-icon"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3C13 6.8 11.5 6 9 6c-2.2 0-4 .5-4 2v4H3c-.6 0-1 .4-1 1v3c0 .6.4 1 1 1h2"></path><circle cx="7" cy="17" r="2"></circle><circle cx="17" cy="17" r="2"></circle></svg>
+        <article class="premium-card">
+          <div class="premium-img-wrap">
+            <img src="img/loc-station.jpg" alt="남성역 헤르니티 남성역 초역세권" class="premium-img" loading="lazy">
           </div>
-          <h3 class="card-title">남성역 초역세권</h3>
-          <p class="card-desc">7호선 남성역 도보 150m 이내 초역세권으로 논현역 5정거장 진입 가능. 서리풀터널을 통해 서초 및 강남역 일대로 편리하게 직접 이동할 수 있습니다.</p>
-        </div>
-
-        <div class="premium-card">
-          <div class="card-icon-container">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="card-icon"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+          <button type="button" class="premium-toggle" aria-expanded="false" aria-controls="premium-desc-1">
+            <span class="card-title">남성역 초역세권</span>
+            <span class="premium-toggle-icon" aria-hidden="true"></span>
+          </button>
+          <div class="premium-desc" id="premium-desc-1" hidden>
+            <p class="card-desc">7호선 남성역 도보 150m 이내 초역세권으로 논현역 5정거장 진입 가능. 서리풀터널을 통해 서초 및 강남역 일대로 편리하게 직접 이동할 수 있습니다.</p>
           </div>
-          <h3 class="card-title">서리풀터널 & 사당로 확장 수혜</h3>
-          <p class="card-desc">서리풀터널 개통으로 서초·강남권 승용차 10~20분대 도달 가능하며, 사당로가 기존 4차선에서 6차선으로 확장되어 상습 교통 정체가 해소되었습니다.</p>
-        </div>
-
-        <div class="premium-card">
-          <div class="card-icon-container">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="card-icon"><path d="M22 10v6M2 10v6M12 4l10 6-10 6L2 10l10-6z"></path><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"></path></svg>
+        </article>
+        <article class="premium-card">
+          <div class="premium-img-wrap">
+            <img src="img/loc-tunnel.jpg" alt="남성역 헤르니티 서리풀터널 & 사당로 확장 수혜" class="premium-img" loading="lazy">
           </div>
-          <h3 class="card-title">안심 교육 학군 & 우수 학원가</h3>
-          <p class="card-desc">행림초등학교, 남성중학교, 동작고등학교를 도보로 통학할 수 있으며, 서울대, 총신대, 반포 학원가가 인접해 강남권 최고 수준의 교육 환경을 선사합니다.</p>
-        </div>
-
-        <div class="premium-card">
-          <div class="card-icon-container">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="card-icon"><path d="M12 2L2 22h20L12 2z"></path><path d="M12 18v-8"></path></svg>
+          <button type="button" class="premium-toggle" aria-expanded="false" aria-controls="premium-desc-2">
+            <span class="card-title">서리풀터널 & 사당로 확장 수혜</span>
+            <span class="premium-toggle-icon" aria-hidden="true"></span>
+          </button>
+          <div class="premium-desc" id="premium-desc-2" hidden>
+            <p class="card-desc">서리풀터널 개통으로 서초역·강남역 방면 차량 이동이 한결 편리해졌으며(교육자료 기준 강남역까지 차량 약 30분), 사당로가 기존 4차선에서 6차선으로 확장되어 상습 교통 정체가 해소되었습니다.</p>
           </div>
-          <h3 class="card-title">쾌적한 숲세권 (Green Life)</h3>
-          <p class="card-desc">단지 바로 앞 약 11만 평 규모의 까치산공원이 있어 도심 속 청정 녹지를 누릴 수 있으며 서리풀공원, 서달산 등 풍부한 녹지축과 이어져 쾌적합니다.</p>
-        </div>
-
-        <div class="premium-card">
-          <div class="card-icon-container">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="card-icon"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><path d="M2 12h20"></path></svg>
+        </article>
+        <article class="premium-card">
+          <div class="premium-img-wrap">
+            <img src="img/loc-school.jpg" alt="남성역 헤르니티 안심 교육 학군 & 우수 학원가" class="premium-img" loading="lazy">
           </div>
-          <h3 class="card-title">명품 생활 편의시설 인접</h3>
-          <p class="card-desc">홈플러스, 이마트, 사당시장, 사당다목적체육관, 예술의전당 등 탄탄한 문화/쇼핑 인프라가 주변에 밀집해 완벽한 생활 편의를 누릴 수 있습니다.</p>
-        </div>
-
-        <div class="premium-card">
-          <div class="card-icon-container">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="card-icon"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+          <button type="button" class="premium-toggle" aria-expanded="false" aria-controls="premium-desc-3">
+            <span class="card-title">안심 교육 학군 & 우수 학원가</span>
+            <span class="premium-toggle-icon" aria-hidden="true"></span>
+          </button>
+          <div class="premium-desc" id="premium-desc-3" hidden>
+            <p class="card-desc">행림초등학교, 남성중학교, 동작고등학교를 도보로 통학할 수 있으며, 서울대, 총신대, 반포 학원가가 인접해 강남권 최고 수준의 교육 환경을 선사합니다.</p>
           </div>
-          <h3 class="card-title">성공적인 개발 핵심 축</h3>
-          <p class="card-desc">장승배기 종합행정타운, 사당역 복합환승센터 개발로 미래 자산 가치 향상이 보장되며, 동작구 내 지역주택조합 성공 사례 1위의 가치를 선점합니다.</p>
-        </div>
-
-        <!-- Map Gallery for Location -->
-        <div class="map-gallery-section">
-          <div class="gallery-header">
-            <h3>🗺️ 입지 환경 분석 지도</h3>
-            <p>종합 입지부터 교통망, 교육 환경까지 세분화된 상세 안내 지도를 확인하십시오.</p>
+        </article>
+        <article class="premium-card">
+          <div class="premium-img-wrap">
+            <img src="img/loc-green.jpg" alt="남성역 헤르니티 쾌적한 숲세권 (Green Life)" class="premium-img" loading="lazy">
           </div>
-          <div class="map-gallery-container">
-            <div class="map-gallery-tabs">
-              <button class="map-tab-trigger active" data-target="map-total">종합 입지</button>
-              <button class="map-tab-trigger" data-target="map-traffic">교통망 입지</button>
-              <button class="map-tab-trigger" data-target="map-education">안심 학군 입지</button>
-            </div>
-            <div class="map-gallery-content">
-              <div class="map-content active" id="map-total">
-                <img src="img/location-total.png" alt="종합 입지 지도" class="gallery-map-img" loading="lazy">
-              </div>
-              <div class="map-content" id="map-traffic">
-                <img src="img/location-traffic.png" alt="교통망 입지 지도" class="gallery-map-img" loading="lazy">
-              </div>
-              <div class="map-content" id="map-education">
-                <img src="img/location-education.png" alt="안심 학군 입지 지도" class="gallery-map-img" loading="lazy">
-              </div>
-            </div>
+          <button type="button" class="premium-toggle" aria-expanded="false" aria-controls="premium-desc-4">
+            <span class="card-title">쾌적한 숲세권 (Green Life)</span>
+            <span class="premium-toggle-icon" aria-hidden="true"></span>
+          </button>
+          <div class="premium-desc" id="premium-desc-4" hidden>
+            <p class="card-desc">단지 바로 앞 약 11만 평 규모의 까치산공원이 있어 도심 속 청정 녹지를 누릴 수 있으며 서리풀공원, 서달산 등 풍부한 녹지축과 이어져 쾌적합니다.</p>
           </div>
-        </div>
-
+        </article>
+        <article class="premium-card">
+          <div class="premium-img-wrap">
+            <img src="img/loc-living.jpg" alt="남성역 헤르니티 명품 생활 편의시설 인접" class="premium-img" loading="lazy">
+          </div>
+          <button type="button" class="premium-toggle" aria-expanded="false" aria-controls="premium-desc-5">
+            <span class="card-title">명품 생활 편의시설 인접</span>
+            <span class="premium-toggle-icon" aria-hidden="true"></span>
+          </button>
+          <div class="premium-desc" id="premium-desc-5" hidden>
+            <p class="card-desc">홈플러스, 이마트, 사당시장, 사당다목적체육관, 예술의전당 등 탄탄한 문화/쇼핑 인프라가 주변에 밀집해 완벽한 생활 편의를 누릴 수 있습니다.</p>
+          </div>
+        </article>
+        <article class="premium-card">
+          <div class="premium-img-wrap">
+            <img src="img/loc-develop.jpg" alt="남성역 헤르니티 성공적인 개발 핵심 축" class="premium-img is-contain" loading="lazy">
+          </div>
+          <button type="button" class="premium-toggle" aria-expanded="false" aria-controls="premium-desc-6">
+            <span class="card-title">성공적인 개발 핵심 축</span>
+            <span class="premium-toggle-icon" aria-hidden="true"></span>
+          </button>
+          <div class="premium-desc" id="premium-desc-6" hidden>
+            <p class="card-desc">장승배기 종합행정타운, 사당역 복합환승센터 개발로 미래 자산 가치 향상이 보장되며, 동작구 내 지역주택조합 성공 사례 1위의 가치를 선점합니다.</p>
+          </div>
+        </article>
       </div>
+      <p class="premium-hint">항목을 누르면 설명이, 사진을 누르면 크게 볼 수 있습니다. ※ 이미지는 조합 교육자료 기준이며 인허가 과정에서 변경될 수 있습니다.</p>
     </div>
   </section>
 
@@ -811,42 +781,6 @@
     </div>
   </section>
 
-  <!-- Info Section (Naver TV) -->
-  <section class="info-section" id="more-info">
-    <div class="section-container">
-      <div class="section-header">
-        <span class="section-badge">NAMSUNG STATION HERNITY INFO</span>
-        <h2 class="section-title">남성역 헤르니티 <span class="gold-text">알아보기</span></h2>
-        <div class="title-bar"></div>
-        <p class="section-desc">홍보 영상과 상세 안내를 통해 남성역 헤르니티의 프리미엄 가치를 직접 확인해 보세요.</p>
-      </div>
-
-      <div class="info-layout">
-        <div class="info-content-box">
-          <div class="info-tag">NAVER TV</div>
-          <h3 class="info-content-title">남성역 헤르니티 소개 영상</h3>
-          <p class="info-content-desc">
-            7호선 남성역 도보 2분 초역세권 프리미엄 대단지, 남성역 헤르니티의 압도적 미래 비전과 입지 분석, 타입별 평면도 정보를 담은 소개 영상입니다. 입지 환경과 특화 설계 정보를 생생하게 시청하실 수 있습니다.
-          </p>
-          <a href="https://tv.naver.com/v/103186277" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="play-icon"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-            <span>영상 시청하기 (네이버 TV)</span>
-          </a>
-        </div>
-        <div class="info-media-box">
-          <a href="https://tv.naver.com/v/103186277" target="_blank" rel="noopener noreferrer" class="video-thumbnail-card">
-            <img src="thumbnail.jpg" alt="남성역 헤르니티 네이버 TV 소개 영상 썸네일" class="video-thumbnail" loading="lazy">
-            <div class="video-overlay">
-              <div class="play-btn-circle">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="play-svg"><polygon points="8 5 19 12 8 19 8 5"></polygon></svg>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- BOARD:START (tools/build_board.py 가 자동 생성) -->
   <section class="home-board-section" id="board">
     <div class="section-container">
@@ -1004,6 +938,122 @@
     </div>
   </section>
 
+  <!-- Intro (Bottom) Section : 사업개요 + 소개영상, 접고 펼치기 -->
+  <section class="intro-section" id="intro">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-badge">ABOUT HERNITY</span>
+        <h2 class="section-title">남성역 헤르니티 <span class="gold-text">소개</span></h2>
+        <div class="title-bar"></div>
+      </div>
+
+      <details class="intro-fold" id="overview">
+        <summary class="intro-fold-summary"><span>사업개요 보러가기</span><span class="fold-icon" aria-hidden="true"></span></summary>
+        <div class="intro-fold-body">
+          <div class="overview-grid">
+        <div class="overview-info">
+          <table class="overview-table">
+            <tbody>
+              <tr>
+                <th>사업명</th>
+                <td>남성역 헤르니티 (구 남성역 동양라파크 사당)</td>
+              </tr>
+              <tr>
+                <th>위치</th>
+                <td>서울특별시 동작구 사당동 235-53번지 일원</td>
+              </tr>
+              <tr>
+                <th>대지면적</th>
+                <td>31,856.80 ㎡ (9,636.68평)</td>
+              </tr>
+              <tr>
+                <th>건축면적</th>
+                <td>8,878.67 ㎡ (2,685.80평)</td>
+              </tr>
+              <tr>
+                <th>연면적</th>
+                <td>199,162.94 ㎡ (60,246.79평)</td>
+              </tr>
+              <tr>
+                <th>건폐율 / 용적률</th>
+                <td>27.87% / 409.12%</td>
+              </tr>
+              <tr>
+                <th>건축규모</th>
+                <td>지하 4층 ~ 지상 최대 37층, 7개동</td>
+              </tr>
+              <tr>
+                <th>전체 세대수</th>
+                <td>총 1,210세대 (SHIFT 임대 포함)</td>
+              </tr>
+              <tr>
+                <th>시행사 (사업주체)</th>
+                <td>남성역지역주택조합추진위원회</td>
+              </tr>
+              <tr>
+                <th>자금대리사무사</th>
+                <td>코람코자산신탁 (신탁사)</td>
+              </tr>
+              <tr>
+                <th>시공참여의향사</th>
+                <td>GS건설</td>
+              </tr>
+              <tr>
+                <th>인허가 · 설계</th>
+                <td>한국종합건축사사무소 (코리아그룹)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="overview-cards">
+          <div class="stat-card">
+            <div class="stat-num">1,210</div>
+            <div class="stat-label">전체 총 세대수</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">37<span class="unit">층</span></div>
+            <div class="stat-label">지상 최고 층수</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">97<span class="unit">%</span></div>
+            <div class="stat-label">남향 위주(남동·남서향) 배치율</div>
+          </div>
+        </div>
+      </div>
+        </div>
+      </details>
+
+      <details class="intro-fold" id="more-info">
+        <summary class="intro-fold-summary"><span>네이버TV 소개 영상 보러가기</span><span class="fold-icon" aria-hidden="true"></span></summary>
+        <div class="intro-fold-body">
+          <div class="info-layout">
+        <div class="info-content-box">
+          <div class="info-tag">NAVER TV</div>
+          <h3 class="info-content-title">남성역 헤르니티 소개 영상</h3>
+          <p class="info-content-desc">
+            7호선 남성역 도보 2분 초역세권 프리미엄 대단지, 남성역 헤르니티의 압도적 미래 비전과 입지 분석, 타입별 평면도 정보를 담은 소개 영상입니다. 입지 환경과 특화 설계 정보를 생생하게 시청하실 수 있습니다.
+          </p>
+          <a href="https://tv.naver.com/v/103186277" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="play-icon"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            <span>영상 시청하기 (네이버 TV)</span>
+          </a>
+        </div>
+        <div class="info-media-box">
+          <a href="https://tv.naver.com/v/103186277" target="_blank" rel="noopener noreferrer" class="video-thumbnail-card">
+            <img src="thumbnail.jpg" alt="남성역 헤르니티 네이버 TV 소개 영상 썸네일" class="video-thumbnail" loading="lazy">
+            <div class="video-overlay">
+              <div class="play-btn-circle">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="play-svg"><polygon points="8 5 19 12 8 19 8 5"></polygon></svg>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+        </div>
+      </details>
+    </div>
+  </section>
+
   <!-- Legal Notice & Footer -->
   <footer class="footer">
     <div class="footer-container">
@@ -1061,6 +1111,6 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="top-icon"><polyline points="18 15 12 9 6 15"></polyline></svg>
   </button>
 
-  <script src="script.js?v=14"></script>
+  <script src="script.js?v=20"></script>
 </body>
 </html>

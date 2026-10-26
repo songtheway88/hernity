@@ -2,6 +2,17 @@
    남성역 헤르니티 - Interactive Scripts
    ========================================== */
 
+// 모바일 핀치 확대 차단 (고정 크기 사이트). iOS Safari는 user-scalable=no를 무시하므로 제스처 이벤트로 막고,
+// 더블탭 확대는 style.css 의 touch-action: pan-x pan-y 로 막는다.
+(function lockZoom() {
+  ['gesturestart', 'gesturechange', 'gestureend'].forEach((type) => {
+    document.addEventListener(type, (e) => e.preventDefault(), { passive: false });
+  });
+  document.addEventListener('touchmove', (e) => {
+    if (e.touches && e.touches.length > 1) e.preventDefault();
+  }, { passive: false });
+})();
+
 function initializeApp() {
   
   // 0. 방문예약 날짜/시간 피커 및 드롭다운 선택 로직
@@ -128,6 +139,17 @@ function initializeApp() {
     });
   });
 
+  // 3-1. 입지 카드: 제목을 누르면 설명 펼침/접기
+  document.querySelectorAll('.premium-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const panel = document.getElementById(btn.getAttribute('aria-controls'));
+      if (!panel) return;
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      panel.hidden = expanded;
+    });
+  });
+
   // 3-2. Map Gallery Tab System (Location Maps)
   const mapTriggers = document.querySelectorAll('.map-tab-trigger');
   const mapContents = document.querySelectorAll('.map-content');
@@ -160,6 +182,8 @@ function initializeApp() {
       
       const targetElement = document.querySelector(targetId);
       if (targetElement) {
+        // 접힌 소개(details)로 이동할 때는 펼쳐서 보여준다
+        if (targetElement.tagName === 'DETAILS') targetElement.open = true;
         const offset = header.offsetHeight;
         const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - offset;
         
@@ -341,6 +365,84 @@ function initializeApp() {
   }
 
 
+  // 7. 질문하기 폼 (히어로 아래) → 상담 신청과 같은 /api/send-telegram 으로 전송
+  const askForm = document.getElementById('ask-form');
+
+  if (askForm) {
+    askForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const questionInput = document.getElementById('ask-question');
+      const nameInput = document.getElementById('ask-name');
+      const phoneInput = document.getElementById('ask-phone');
+      const privacyCheckbox = document.getElementById('ask-privacy');
+      const submitBtn = askForm.querySelector('.btn-submit');
+      const phoneValue = phoneInput.value.replace(/[^0-9]/g, '');
+
+      if (!questionInput.value.trim()) {
+        showToast('질문 내용을 입력해 주세요.', 'error');
+        questionInput.focus();
+        return;
+      }
+      if (!nameInput.value.trim()) {
+        showToast('이름을 입력해 주세요.', 'error');
+        nameInput.focus();
+        return;
+      }
+      if (!phoneValue || phoneValue.length < 9 || phoneValue.length > 11) {
+        showToast('올바른 전화번호를 입력해 주세요.', 'error');
+        phoneInput.focus();
+        return;
+      }
+      if (!privacyCheckbox.checked) {
+        showToast('개인정보 수집·이용에 동의하셔야 질문을 남길 수 있습니다.', 'error');
+        return;
+      }
+
+      let formattedPhone = phoneValue;
+      if (phoneValue.length === 11) {
+        formattedPhone = `${phoneValue.slice(0, 3)}-${phoneValue.slice(3, 7)}-${phoneValue.slice(7)}`;
+      } else if (phoneValue.length === 10) {
+        formattedPhone = `${phoneValue.slice(0, 3)}-${phoneValue.slice(3, 6)}-${phoneValue.slice(6)}`;
+      }
+
+      const originalBtnText = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.textContent = '전송 중...';
+
+      fetch('/api/send-telegram', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: nameInput.value.trim(),
+          phone: formattedPhone,
+          prefType: '질문 문의',
+          residence: '',
+          visitDate: '',
+          message: `[질문] ${questionInput.value.trim()}`,
+          funnel: '홈페이지 질문하기'
+        })
+      })
+      .then(response => {
+        if (response.ok) {
+          showToast('질문이 접수되었습니다! 전문 상담사가 곧 답변 드리겠습니다.', 'success');
+          askForm.reset();
+        } else {
+          showToast('전송 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.', 'error');
+        }
+      })
+      .catch(error => {
+        console.error('Error sending question:', error);
+        showToast('네트워크 오류가 발생했습니다. 인터넷 연결을 확인해 주세요.', 'error');
+      })
+      .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnText;
+      });
+    });
+  }
+
+
   // 8. Image Lightbox Modal System
   const imgModal = document.getElementById('image-modal');
   const imgModalImg = document.getElementById('image-modal-img');
@@ -348,7 +450,7 @@ function initializeApp() {
   const imgModalClose = document.getElementById('image-modal-close');
   
   if (imgModal && imgModalImg && imgModalClose) {
-    const zoomableImages = document.querySelectorAll('.gallery-map-img, .dev-banner-img, .visual-loaded-img');
+    const zoomableImages = document.querySelectorAll('.gallery-map-img, .dev-banner-img, .visual-loaded-img, .premium-img');
     
     zoomableImages.forEach(img => {
       img.style.cursor = 'zoom-in';

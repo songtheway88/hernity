@@ -1,11 +1,7 @@
 /* ==========================================
    분양소식 게시판 (board/) + 메인 최신글 블록
    ========================================== */
-.board-page .header {
-  background-color: rgba(10, 12, 16, 0.96);
-  backdrop-filter: blur(12px) saturate(180%);
-  border-bottom: 1px solid var(--border-color-light);
-}
+
 
 .board-main {
   padding: calc(var(--header-height) + 40px) 0 80px;
@@ -25,7 +21,7 @@
 .breadcrumb a:hover { color: var(--accent-gold); }
 
 .board-head { margin-bottom: 32px; }
-.board-title { font-size: 2rem; margin-bottom: 12px; }
+.board-title { font-family: var(--font-display); font-size: 2rem; margin-bottom: 12px; }
 .board-desc { color: var(--text-secondary); }
 
 .notice-tag {
@@ -65,11 +61,11 @@
 .board-table .col-title a:hover { color: var(--accent-gold); }
 
 .board-more { text-align: right; font-size: 0.9rem; }
-.board-more a { color: var(--accent-gold); }
+.board-more a { color: var(--accent-gold-dark); font-weight: 600; }
 
 /* 글 본문 */
 .post-header { margin-bottom: 24px; }
-.post-title { font-size: 1.9rem; line-height: 1.35; margin: 12px 0; }
+.post-title { font-family: var(--font-display); font-size: 1.9rem; line-height: 1.4; margin: 12px 0; }
 .post-meta { font-size: 0.85rem; color: var(--text-muted); }
 
 .post-figure { margin: 0 0 32px; }
@@ -99,7 +95,7 @@
   padding-bottom: 8px;
   border-bottom: 1px solid var(--border-color);
 }
-.post-body h3 { font-size: 1.08rem; margin: 24px 0 8px; color: var(--accent-gold-hover); }
+.post-body h3 { font-size: 1.08rem; margin: 24px 0 8px; color: var(--accent-gold-dark); }
 .post-body p { margin-bottom: 14px; }
 .post-body ul,
 .post-body ol { margin: 0 0 16px 1.3em; }
@@ -107,7 +103,7 @@
 .post-body ol { list-style: decimal; }
 .post-body li { margin-bottom: 6px; }
 .post-body strong { color: var(--text-primary); }
-.post-body a { color: var(--accent-gold); text-decoration: underline; text-underline-offset: 3px; }
+.post-body a { color: var(--accent-gold-dark); text-decoration: underline; text-underline-offset: 3px; }
 .post-body .note { font-size: 0.85rem; color: var(--text-muted); }
 
 .post-table {
@@ -159,7 +155,7 @@
   border: 1px solid var(--border-color-light);
   border-radius: 8px;
   overflow: hidden;
-  background: var(--bg-secondary);
+  background: var(--surface);
   height: 100%;
 }
 .related-cards a:hover { border-color: var(--accent-gold); }
