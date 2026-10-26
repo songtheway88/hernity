@@ -90,7 +90,7 @@ def head(title, description, canonical, keywords="", og_image=f"{SITE}/img/og-im
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700&display=swap">
   <link rel="stylesheet" href="/style.css?v={ASSET_VER}">
-  <link rel="stylesheet" href="/board/board.css?v={ASSET_VER}">
+  <link rel="stylesheet" href="/board/board.css?v={ASSET_VER}1">
 {ld_html}
 </head>
 <body class="board-page">
@@ -251,7 +251,7 @@ def build_post(p):
         <header class="post-header">
           <span class="notice-tag">공지</span>
           <h1 class="post-title">{esc(p['title'])}</h1>
-          <p class="post-meta"><time datetime="{p['date']}">{fmt_date(p['date'])}</time> · 남성역 헤르니티 분양소식</p>
+          <p class="post-meta"><time datetime="{p['date']}">{fmt_date(p['date'])}</time>{f" · 수정 {fmt_date(p['updated'])}" if p.get('updated') else ""} · 남성역 헤르니티 분양소식</p>
         </header>
         <figure class="post-figure"><img src="/{p['image']}" alt="{esc(p['title'])}"></figure>
         <div class="post-body">
