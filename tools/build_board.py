@@ -89,6 +89,8 @@ def head(title, description, canonical, keywords="", og_image=f"{SITE}/img/og-im
   <link rel="stylesheet" href="/style.css?v={ASSET_VER}">
   <link rel="stylesheet" href="/board/board.css?v={ASSET_VER}1">
 {ld_html}
+  <!-- 분양천국 대시보드: 방문 기록 + 메타 픽셀(PageView·전화 Contact·신청 Lead) -->
+  <script src="https://bunyang-dashboard.vercel.app/track.js" data-project="dfeb567e-2270-4ed2-ac07-d4cb1f854b61" defer></script>
 </head>
 <body class="board-page">
 """
