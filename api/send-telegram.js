@@ -91,7 +91,9 @@ export default async function handler(req, res) {
     // Support multiple Chat IDs split by comma
     const chatIds = rawChatIds.split(',').map(id => id.trim()).filter(Boolean);
 
-    const messageText = `✨ [남성역 헤르니티 관심고객 등록] ✨
+    // 여기까지 왔다는 건 대시보드 접수가 실패했다는 뜻이다(담당자 문자·대시보드 등록이 안 됨). 대표님이 알아보게 표시한다.
+    const messageText = `⚠️ 대시보드 접수 실패 — 담당자 문자 안 감, 직접 연락 필요
+✨ [남성역 헤르니티 관심고객 등록] ✨
 --------------------------------
 👤 이름: ${name || '미입력'}
 📞 연락처: ${phone || '미입력'}
